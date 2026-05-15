@@ -2,6 +2,7 @@
 
 ## Video reference for this lecture is the following:
 
+[![Watch the video](https://img.youtube.com/vi/w4c_NIjO3XI/maxresdefault.jpg)](https://www.youtube.com/watch?v=w4c_NIjO3XI)
 
 ---
 ## ⭐ Support the Project  
@@ -90,8 +91,11 @@ Recommended topics:
 
 Resources:
 
-* YouTube Playlist: [https://www.youtube.com/playlist?list=PLmPit9IIdzwT6nq8hIuf7MBcPVzw3cX3K](https://www.youtube.com/playlist?list=PLmPit9IIdzwT6nq8hIuf7MBcPVzw3cX3K)
-* GitHub Notes: [https://github.com/CloudWithVarJosh/Git-Masterclass](https://github.com/CloudWithVarJosh/Git-Masterclass)
+* YouTube Playlist:
+  [https://www.youtube.com/playlist?list=PLmPit9IIdzwT6nq8hIuf7MBcPVzw3cX3K](https://www.youtube.com/playlist?list=PLmPit9IIdzwT6nq8hIuf7MBcPVzw3cX3K)
+
+* GitHub Notes:
+  [https://github.com/CloudWithVarJosh/Git-Masterclass](https://github.com/CloudWithVarJosh/Git-Masterclass)
 
 ---
 
@@ -114,8 +118,11 @@ YAML knowledge is heavily used across:
 
 Resources:
 
-* Video: [https://youtu.be/LT3U9fkOVDQ](https://youtu.be/LT3U9fkOVDQ)
-* GitHub Notes: [https://github.com/CloudWithVarJosh/CKA-Certification-Course-2025/tree/main/Day%2009](https://github.com/CloudWithVarJosh/CKA-Certification-Course-2025/tree/main/Day%2009)
+* Video:
+  [https://youtu.be/LT3U9fkOVDQ](https://youtu.be/LT3U9fkOVDQ)
+
+* GitHub Notes:
+  [https://github.com/CloudWithVarJosh/CKA-Certification-Course-2025/tree/main/Day%2009](https://github.com/CloudWithVarJosh/CKA-Certification-Course-2025/tree/main/Day%2009)
 
 ---
 
@@ -136,8 +143,11 @@ Topics covered:
 
 Resources:
 
-* Video: [https://youtu.be/imEHsgvJbYo](https://youtu.be/imEHsgvJbYo)
-* GitHub Notes: [https://github.com/CloudWithVarJosh/Jenkins-Basics-To-Production/tree/main/Day%2001](https://github.com/CloudWithVarJosh/Jenkins-Basics-To-Production/tree/main/Day%2001)
+* Video:
+  [https://youtu.be/imEHsgvJbYo](https://youtu.be/imEHsgvJbYo)
+
+* GitHub Notes:
+  [https://github.com/CloudWithVarJosh/Jenkins-Basics-To-Production/tree/main/Day%2001](https://github.com/CloudWithVarJosh/Jenkins-Basics-To-Production/tree/main/Day%2001)
 
 ---
 
@@ -160,8 +170,11 @@ Topics covered:
 
 Resources:
 
-* Video: [https://youtu.be/szPE1NKc614](https://youtu.be/szPE1NKc614)
-* GitHub Notes: [https://github.com/CloudWithVarJosh/Jenkins-Basics-To-Production/tree/main/Day%2002](https://github.com/CloudWithVarJosh/Jenkins-Basics-To-Production/tree/main/Day%2002)
+* Video:
+  [https://youtu.be/szPE1NKc614](https://youtu.be/szPE1NKc614)
+
+* GitHub Notes:
+  [https://github.com/CloudWithVarJosh/Jenkins-Basics-To-Production/tree/main/Day%2002](https://github.com/CloudWithVarJosh/Jenkins-Basics-To-Production/tree/main/Day%2002)
 
 
 ---
@@ -239,6 +252,8 @@ These tools dominate the industry because they solve CI/CD from different operat
 
 Modern software delivery involves repetitive engineering operations that must execute **consistently, reliably, and at scale**.
 
+![Alt text](/images/1a.png)
+
 ---
 
 ### Continuous Integration (CI)
@@ -307,6 +322,8 @@ Performing these operations manually introduces several operational challenges:
 ## Example: Typical CI/CD Pipeline for a Java Containerized Application
 
 The below diagram represents a typical **production-grade CI/CD pipeline** for a modern **Java containerized application**. While tooling varies across organizations, the overall software delivery lifecycle and execution stages remain conceptually similar.
+
+![Alt text](/images/1b.png)
 
 **1. Fetch Source Code**
 
@@ -385,6 +402,8 @@ The below diagram represents a typical **production-grade CI/CD pipeline** for a
 ---
 
 ## What is GitHub Actions?
+
+![Alt text](/images/1c.png)
 
 **GitHub Actions** is GitHub’s event-driven automation and workflow orchestration platform that allows developers and DevOps engineers to automate software delivery and repository workflows directly from GitHub repositories.
 
@@ -483,6 +502,8 @@ The following advantages are more strongly associated with **GitHub Actions** an
 ---
 
 ## Core Constructs of GitHub Actions
+
+![Alt text](/images/1d.png)
 
 Before writing GitHub Actions workflows, it is important to understand the three primary building blocks used inside the platform.
 
@@ -706,6 +727,8 @@ We will explore reusable actions, GitHub Marketplace integrations, and advanced 
 ---
 
 ## Runners
+
+![Alt text](/images/1e.png)
 
 While workflows, jobs, and steps define the automation logic, the actual execution is performed by **runners**.
 
