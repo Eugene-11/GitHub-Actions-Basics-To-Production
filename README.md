@@ -22,7 +22,7 @@ TBD
 
 ## YouTube Playlist for This Course
 
-TBD
+[GitHub Actions: Basics to Production Playlist](https://www.youtube.com/playlist?list=PLmPit9IIdzwThF00pAAvktjkVtL7APhD5)
 
 ---
 
