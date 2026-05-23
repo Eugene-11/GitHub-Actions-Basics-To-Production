@@ -2,6 +2,7 @@
 
 ## Video reference for this lecture is the following:
 
+[![Watch the video](https://img.youtube.com/vi/zpDH_tfOOqc/maxresdefault.jpg)](https://www.youtube.com/watch?v=zpDH_tfOOqc&ab_channel=CloudWithVarJosh)
 
 ---
 ## ⭐ Support the Project  
