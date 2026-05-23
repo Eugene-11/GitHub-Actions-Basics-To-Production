@@ -419,7 +419,7 @@ GitHub Actions scheduled workflows use **standard cron syntax**. However, GitHub
 Useful cron expression generator:
 https://crontab.guru/
 
-Important production considerations for scheduled workflows:
+Important **production considerations** for scheduled workflows:
 
 * GitHub Actions scheduled workflows operate using a **best-effort scheduling model** and are not guaranteed to start exactly on time.
 * During periods of high GitHub Actions platform load, scheduled workflow execution may experience noticeable delays.
@@ -520,7 +520,7 @@ At the time of recording, standard runners commonly provide:
 > **Note:** Runner specifications may vary depending on repository visibility (public vs private), runner architecture, GitHub plan, and future GitHub infrastructure updates.
 
 Official GitHub documentation:
-[GitHub-Hosted Runner Specifications](https://docs.github.com/en/actions/reference/runners/github-hosted-runners?utm_source=chatgpt.com)
+[GitHub-Hosted Runner Specifications](https://docs.github.com/en/actions/reference/runners/github-hosted-runners)
 
 Standard runners are sufficient **for many common CI/CD workloads**, although actual compute, memory, and storage requirements vary significantly depending on application architecture, tooling, concurrency levels, testing strategy, and pipeline complexity.
 
@@ -654,7 +654,7 @@ Observations from the workflow:
 * `runs-on: ubuntu-latest` instructs GitHub Actions to provision an Ubuntu-based GitHub-hosted runner for this job.
 * `RUNNER_NAME`, `RUNNER_OS`, and `RUNNER_ARCH` are predefined environment variables automatically exposed by the runner environment.
 * The `|` symbol inside the `run` block represents YAML multi-line block syntax, allowing multiple shell commands to execute sequentially inside the same step.
-* Without `|`, each command would need separate `run` statements or inline chaining.
+* Without `|`, commands would typically need to be written using inline command chaining (`&&`, `;`) or alternative YAML string formats.
 * The `run` block executes shell commands directly inside the provisioned runner environment.
 
 Official predefined variable documentation:
@@ -844,6 +844,9 @@ These concepts form the operational foundation for advanced GitHub Actions topic
 
 * GitHub Actions Variables Reference  
   https://docs.github.com/en/actions/reference/variables-reference
+
+* GitHub Actions Contexts Reference  
+  https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
 
 * GitHub-Hosted Runner Documentation  
   https://docs.github.com/en/actions/reference/runners/github-hosted-runners
