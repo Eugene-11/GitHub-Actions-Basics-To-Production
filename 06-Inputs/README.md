@@ -2,6 +2,7 @@
 
 ## Video reference for this lecture is the following:
 
+[![Watch the video](https://img.youtube.com/vi/fLZRgNhQq3w/maxresdefault.jpg)](https://youtu.be/fLZRgNhQq3w)
 
 ---
 
@@ -118,6 +119,8 @@ Now that we understand **what Inputs are** and how they fit into the broader Git
 
 ## Types of Inputs
 
+![Alt text](/images/6a.png)
+
 GitHub Actions supports three primary types of inputs:
 
 **1. Workflow Inputs**
@@ -228,11 +231,18 @@ Deploying to prod
 
 > **Production Insight:** Workflow Inputs are commonly used for environment selection, release version selection, deployment approvals, rollback targets, maintenance operations, scaling activities, and other operational workflows triggered on demand.
 
-> **Important:** Although Workflow Inputs are commonly demonstrated using the GitHub UI, they are not limited to manual execution. Workflows triggered through **`workflow_dispatch`** can also be invoked programmatically using the **GitHub API** or **GitHub CLI**, with input values supplied as part of the request.
+> **Important:** Although Workflow Inputs are commonly demonstrated using the **GitHub UI**, they are not limited to manual execution. Workflows triggered through **`workflow_dispatch`** can also be invoked programmatically using the **GitHub API** or **GitHub CLI**, with input values supplied as part of the request.
 >
-> Think of it like creating an **EC2 instance** in AWS. You can create it manually through the **AWS Management Console**, or you can create the same EC2 instance programmatically using the **AWS CLI**, **SDKs**, or **Terraform**. The end result is the same, only the mechanism used to provide the input values differs.
+> Think of it like creating an **EC2 instance** in AWS. You can create it manually through the **AWS Management Console**, or you can create the same EC2 instance programmatically using the **AWS CLI**, **SDKs**, or **Terraform**. The end result is the same; only the mechanism used to provide the input values differs.
 >
-> Similarly, a GitHub Actions workflow can be triggered manually through the **GitHub UI** or programmatically through the **GitHub API** or **GitHub CLI**, while supplying the required workflow inputs as part of the request. This allows organizations to integrate GitHub Actions with **deployment portals**, **ITSM tools**, **approval systems**, **ChatOps platforms**, and other automation solutions.
+> Similarly, a GitHub Actions workflow can be triggered through multiple interfaces:
+>
+> * **GitHub UI** → Users provide inputs through a web interface.
+> * **GitHub CLI (`gh`)** → Users provide inputs through command-line arguments.
+> * **GitHub REST API** → Applications provide inputs through an HTTP request payload.
+>
+> Regardless of the interface used, the workflow ultimately receives the same input values and executes the same workflow logic. This flexibility allows organizations to integrate GitHub Actions with **deployment portals**, **ITSM tools**, **approval systems**, **ChatOps platforms**, and other automation solutions while continuing to use a single workflow definition.
+
 
 ---
 
@@ -915,6 +925,8 @@ on:
 * This trigger is required because **Workflow Inputs** are supplied during workflow execution and are currently supported through **`workflow_dispatch`**.
 * When a user clicks **Run Workflow**, GitHub displays the configured input fields and allows values to be supplied before execution begins.
 
+> **Important:** If a workflow supports both **`workflow_dispatch`** and **`push`**, do not assume that `workflow_dispatch` input values or defaults will automatically apply to `push` executions. When supporting multiple trigger types, define explicit fallback values or event-specific logic to ensure predictable workflow behavior.
+
 > **Production Insight:** Manual workflows are commonly used for **production deployments**, **rollback operations**, **database migrations**, **maintenance activities**, **disaster recovery procedures**, and other operational tasks that require human decision-making. Rather than automatically executing on every code change, these workflows allow engineers to provide runtime parameters and maintain greater control over critical operations.
 
 
@@ -1144,6 +1156,30 @@ runs-on: ubuntu-latest
 * This reflects a common CI/CD pattern where only approved or validated builds are published to a central registry.
 
 > **Production Insight:** Published images often undergo additional scanning, signing, vulnerability assessment, and policy validation before being approved for production deployment.
+
+> **Design Consideration:** In this demo, we intentionally do **not publish Docker images for the Dev environment**. Instead, we build the image, run a container from it, and perform validation locally on the GitHub Actions runner. This helps demonstrate that the image can be successfully built and executed without storing every development build in a container registry.
+>
+> However, workflow design varies across organizations. Some teams choose to publish images for **all environments**, including Dev, and perform validation using the published image. Others may publish images only after smoke tests, security scans, integration tests, or approval gates have successfully passed. In some organizations, Dev builds may never be published because they are used solely for rapid feedback and validation.
+>
+> **The key takeaway is that CI/CD workflows should reflect the requirements of the application and organization.** Every application, microservice, and engineering team has different needs related to **quality**, **security**, **compliance**, **cost**, **artifact retention**, and **release management**, so workflow design decisions should be made accordingly.
+
+> **Production Consideration:** In this demo, we use a fixed image tag (**`cloudwithvarjosh/cwvj-flask-app:v1.0.1`**) to keep the workflow simple and focus on Workflow Inputs. In production environments, teams typically use **unique and immutable tags** such as **Git commit SHAs**, **build numbers**, **release versions**, or a combination of these values. Like we've seen in the previous lecture.
+>
+> Examples:
+>
+> ```text
+> cloudwithvarjosh/cwvj-flask-app:v1.0.1
+> cloudwithvarjosh/cwvj-flask-app:v1.0.1-build-245
+> cloudwithvarjosh/cwvj-flask-app:9f2c8a7
+> cloudwithvarjosh/cwvj-flask-app:2026.06.12.245
+> ```
+>
+> Using immutable tags improves **traceability**, **auditability**, **rollback capability**, and **deployment reliability**.
+>
+> **Production Insight:** Many organizations follow a **Build Once, Deploy Many** strategy. The application image is built a single time, assigned a unique immutable tag, and then promoted across environments such as **Dev**, **QA**, **UAT**, and **Prod**. This ensures that the exact same artifact that passed testing is ultimately deployed to production, eliminating inconsistencies caused by rebuilding the application multiple times.
+>
+> **Design Consideration:** There is no single tagging or promotion strategy that works for every organization. Some teams rebuild artifacts per environment, while others strictly promote previously validated artifacts. The workflow design should align with the application's **release process**, **compliance requirements**, **rollback strategy**, and **operational practices**.
+
 
 ---
 
@@ -1699,6 +1735,32 @@ jobs:
       run_security_scan: true
       replicas: 5
 ```
+
+> **Understanding Job and Step Execution:** As discussed in previous lectures, **jobs run in parallel by default**, with each job executing on its own independent runner. When you introduce the **`needs`** keyword, you create dependencies between jobs and define the order in which they should execute.
+>
+> Within a job, **steps execute sequentially by default** in the exact order they are defined.
+>
+> By default, if a **step fails**, the remaining steps in that job are skipped and the job is marked as **failed**. Similarly, if a **job fails**, any downstream jobs that depend on it through **`needs`** are skipped and do not execute. However, GitHub Actions also provides functions such as **`always()`**, which can be used to execute specific steps or jobs regardless of the success or failure of earlier execution stages.
+>
+> This behavior helps prevent invalid artifacts, failed validations, or unsuccessful deployments from progressing further through the CI/CD pipeline.
+>
+> For example:
+>
+> ```text
+> Run Unit Tests
+>        ↓
+> Build Artifacts
+>        ↓
+> Deploy Application
+> ```
+>
+> If **Run Unit Tests** fails, then **Build Artifacts** and **Deploy Application** will not execute. Likewise, if a step inside **Build Artifacts** fails, the remaining steps in that job are skipped and the deployment job will never start. An exception would be a step or job configured with **`always()`**, which would still execute.
+>
+> > **Production Insight:** This fail-fast behavior is one of the key reasons CI/CD pipelines are reliable. Problems are detected early and prevented from propagating to later stages such as packaging, publishing, or production deployment, while **`always()`** is commonly used for cleanup, notifications, log collection, and reporting activities.
+
+
+---
+
 #### Explanation
 
 ```yaml
