@@ -2,6 +2,8 @@
 
 ## Video reference for this lecture is the following:
 
+[![Watch the video](https://img.youtube.com/vi/gkIXTCr1Iiw/maxresdefault.jpg)](https://www.youtube.com/watch?v=gkIXTCr1Iiw&ab_channel=CloudWithVarJosh)
+
 ---
 
 ## ⭐ Support the Project  
@@ -617,9 +619,13 @@ outputs:
   deployment_url: ...
 ```
 
-> **Important:** Notice that **Step Outputs** do not require an **`outputs`** block because they are automatically available to **subsequent steps within the same job** through the **`steps`** context. However, when information needs to cross a **job boundary**, GitHub Actions requires the value to be explicitly exposed using a **Job Output**. Think of a **Job Output** as a **Step Output that has been intentionally exported** so that downstream jobs can consume it through the **`needs`** context.
+> **Important:** Notice that **Step Outputs** do not require an **`outputs`** block because they are automatically available to **subsequent steps within the same job** through the **`steps`** context. However, when information needs to cross a **job boundary**, GitHub Actions requires the value to be explicitly exposed using a **Job Output**.
 >
-> In this example, the **Step Output** name (**`deployment_url`**) and the **Job Output** name (**`deployment_url`**) are intentionally kept the same for simplicity and readability. However, this is not a requirement. The **`outputs`** block acts as a mapping layer that allows a Job Output to reference any Step Output generated within the job, even if the two names are different.
+> Think of a **Job Output** as a **Step Output that has been intentionally exported** so that downstream jobs can consume it through the **`needs`** context.
+>
+> In this example, the **Step Output** name (**`deployment_url`**) and the **Job Output** name (**`deployment_url`**) are intentionally kept the same for simplicity and readability. However, this is not a requirement.
+>
+> The job's **`outputs`** block acts as a **mapping layer** between **Step Outputs** and **Job Outputs**. This allows a Job Output to reference any Step Output generated within the job and expose it using a different name if desired.
 >
 > For example, the following mapping is also valid:
 >
@@ -628,7 +634,20 @@ outputs:
 >   application_endpoint: ${{ steps.deploy.outputs.deployment_url }}
 > ```
 >
-> Here, **`deployment_url`** is the Step Output name, while **`application_endpoint`** becomes the Job Output name exposed to downstream jobs.
+> Here:
+>
+> ```text
+> deployment_url      → Step Output Name
+> application_endpoint → Job Output Name
+> ```
+>
+> Although the names are different, both refer to the same underlying value. Downstream jobs would then consume the output using:
+>
+> ```yaml
+> ${{ needs.deploy-job.outputs.application_endpoint }}
+> ```
+>
+> This flexibility allows workflow authors to expose outputs using names that are more meaningful to downstream consumers without changing the names of the underlying Step Outputs.
 
 Flow:
 
