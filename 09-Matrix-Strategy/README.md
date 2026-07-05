@@ -2,6 +2,8 @@
 
 ## Video reference for this lecture is the following:
 
+[![Watch the video](https://img.youtube.com/vi/B5XzHnO_guo/maxresdefault.jpg)](https://www.youtube.com/watch?v=B5XzHnO_guo&ab_channel=CloudWithVarJosh)
+
 ---
 
 ## ⭐ Support the Project  
@@ -41,7 +43,10 @@ We will begin by understanding **why Matrix Strategy is needed**, the challenges
 By the end of this lecture, you will understand how to design **scalable**, **maintainable**, and **production-ready** GitHub Actions workflows that can validate applications across different operating systems, runtime versions, browsers, databases, cloud providers, and many other environments.
 
 ---
+
 ## Why & What of Matrix Strategy?
+
+![Alt text](/images/9a.png)
 
 ### Why Matrix Strategy?
 
@@ -208,6 +213,8 @@ We will answer this question next when we discuss **Matrix Strategy**.
 ---
 
 ### What is Matrix Strategy?
+
+![Alt text](/images/9a.png)
 
 Now that we understand the problem, the next question becomes:
 
