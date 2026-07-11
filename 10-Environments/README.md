@@ -198,18 +198,17 @@ Organizations therefore require a mechanism that automatically injects the corre
 
 ### Challenge 3: Controlled Deployments
 
-Not every deployment should be allowed to proceed automatically. As applications move closer to **Production**, organizations typically enforce stricter controls over **which branches can deploy**, **who can approve deployments**, and **what conditions must be satisfied** before a deployment is allowed to continue.
+Not every deployment should be allowed to proceed automatically. As applications move closer to **Production**, organizations typically enforce stricter controls over **which branches can deploy**, **who can approve Production deployments**, and **what conditions must be satisfied** before a deployment is allowed to proceed.
 
 For example, organizations often restrict deployments as follows:
 
 ```text
-feature/* → Development ✓
 develop → Development ✓
 main → Production ✓
 feature/* → Production ✗
 ```
 
-In addition, organizations may require Production deployments to be approved by authorized users before deployment begins.
+Organizations may also require Production deployments to be approved by authorized users before deployment begins.
 
 ```text
 Developer → Build → Deploy to Production
@@ -221,11 +220,11 @@ Developer → Build → Deploy to Production
                    Continue Deployment
 ```
 
-Some organizations also introduce a **wait timer** after approval to provide an opportunity for final operational checks before deployment proceeds.
+Some organizations also configure a **Wait Timer** after approval to provide a brief window for **final operational checks**, **deployment coordination**, or a **last-minute cancellation** before the deployment proceeds.
 
 Without these controls, a developer could accidentally deploy an unapproved application version to **Production**, or an unauthorized user could initiate a deployment outside the organization's release process. Such incidents can result in **service outages**, **failed releases**, **security issues**, or **compliance violations**.
 
-Organizations therefore require a mechanism that can automatically enforce **deployment branch restrictions**, **required reviewers**, **wait timers**, and other environment-specific deployment policies without embedding complex governance logic directly into every workflow.
+Organizations therefore require a mechanism that can enforce **Deployment Branch Restrictions**, **Required Reviewers**, **Wait Timers**, and other deployment policies without embedding complex governance logic directly into every workflow.
 
 ---
 
