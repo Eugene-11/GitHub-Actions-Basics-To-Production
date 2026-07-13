@@ -1,7 +1,8 @@
-# GitHub Actions Environments | Variables, Secrets & Environment Protection Rules
+# GitHub Actions Environments Explained | Variables, Secrets, Approvals & Protection Rules
 
 ## Video reference for this lecture is the following:
 
+[![Watch the video](https://img.youtube.com/vi/p_qnXBlJg20/maxresdefault.jpg)](https://www.youtube.com/watch?v=p_qnXBlJg20)
 
 ---
 
@@ -67,6 +68,8 @@ Finally, through two end-to-end demonstrations, we will progressively transform 
 
 ## Why GitHub Actions Environments?
 
+![Alt text](/images/10a.png)
+
 So far in this course, every workflow that we have created has executed directly against the repository. Once the workflow reached the deployment step, it immediately deployed the application.
 
 For example:
@@ -116,6 +119,8 @@ Each environment exists for a different purpose.
 ---
 
 ### Deployment Challenges Solved by GitHub Actions Environments
+
+![Alt text](/images/10a.png)
 
 At first glance, deploying across multiple environments appears straightforward.
 
@@ -241,6 +246,8 @@ We will answer this question next when we discuss **GitHub Actions Environments*
 ---
 
 ### What are GitHub Actions Environments?
+
+![Alt text](/images/10a.png)
 
 GitHub Actions **Environments** provide a mechanism to represent different **deployment environments**, such as **Development**, **Staging**, and **Production**, within a GitHub repository.
 
@@ -1094,6 +1101,8 @@ Deploy to Production → Load prod Variables & Secrets → Apply prod Rules → 
 ```
 
 > **Key Observation:** Simply changing **`environment: dev`** to **`environment: prod`** does far more than switch configuration values. It instructs GitHub to associate the job with a different **GitHub Actions Environment**, automatically applying that environment's **Variables**, **Secrets**, **Protection Rules**, **Deployment History**, and other governance controls. This is what makes **GitHub Actions Environments** a **deployment governance** feature rather than simply another place to store Variables and Secrets.
+
+> **Key Observation 2:** The **`if` condition** and **Deployment Branch Restrictions** solve different problems. The **`if` condition** controls **whether a job executes**, while **Deployment Branch Restrictions** control **whether that job is allowed to use a particular GitHub Actions Environment**, including its **Environment Variables**, **Environment Secrets**, **Protection Rules**, and other environment-specific capabilities. Environment protection therefore acts as an additional layer of governance, independent of the workflow logic.
 
 ---
 
