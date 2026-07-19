@@ -5,4 +5,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: print Trigger Event
-            run: echo "my trigger event ${{ github.event_name }}"
+            run: echo "my trigger event is ${{ github.event_name }} event"
