@@ -1,5 +1,8 @@
 name: My 1st Workflow
-on: push
+on:
+  push:
+    branches:
+      - main
 jobs:
   job-1:
     runs_on: ubuntu-latest
