@@ -1,18 +1,15 @@
 name: My 1st Workflow
-on:
-  push:
-    branches:
-      - main
+on: push
 jobs:
   job-1:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Step 1
         run: echo "HELLLOOO from step 1"
       - name: Step 2
         run: echo "hello from step 2"
   job-2:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Final Step
         run: echo "hello from Final step Jon-2"
