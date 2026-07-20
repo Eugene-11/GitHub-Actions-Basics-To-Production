@@ -20,7 +20,8 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v7
         with:
-          context: .
+          context: 03-Actions/project-files
+          file: 03-Actions/project-files/Dockerfile
           push: true
           tags: cloudwithvarjosh/cwvj-flask-app:v1.0.1
 
