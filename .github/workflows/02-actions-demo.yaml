@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  flask-ci-job-2:
+  flask-ci-job-2a:
     runs-on: ubuntu-latest
 
     steps:
