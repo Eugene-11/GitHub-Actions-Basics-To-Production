@@ -1,6 +1,6 @@
 name: 04 - Understanding Runners (Win + Ubuntu)
 
-on: push
+#on: push
 
 jobs:
   ubuntu-runner:

@@ -1,5 +1,5 @@
 name: "01 - understanding context"
-on: push
+#on: push
 jobs:
     event-info-job:
         runs-on: ubuntu-latest
